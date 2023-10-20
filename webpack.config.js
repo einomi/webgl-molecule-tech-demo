@@ -33,6 +33,8 @@ module.exports = {
   optimization: {
     minimize: IS_PRODUCTION,
   },
-  // Uncomment this section if you want to use environment variables in your JS
-  // plugins: [new webpack.EnvironmentPlugin(['STATIC_PATH'])],
+  // plugins: [
+  //   // Uncomment this section if you want to use environment variables in your JS
+  //   //   new webpack.EnvironmentPlugin(['STATIC_PATH'])
+  // ],
 };

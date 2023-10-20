@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block content %}
-  <div data-3d-scene></div>
-  <img class="fixed left-0 top-0 w-full h-full object-cover"
-    src="/background.jpg"
-    alt="" />
+  <picture class="fixed left-0 top-0 w-full h-full object-cover">
+    <source srcset="/background.avif" type="image/avif" />
+    <source srcset="/background.jpg" type="image/jpeg" />
+    <img src="/background.jpg"
+      alt="Background"
+      class="w-full h-full object-cover" />
+  </picture>
+  <div class="fixed w-full h-full left-0 top-0 z-10" data-3d-scene></div>
   <div class="page-home page relative flex h-[100vh] items-center">
     <div class="container">
       <div class="intro">

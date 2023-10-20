@@ -16,7 +16,10 @@
     "resolveJsonModule": true,
     "watch": true,
     "lib": ["dom", "es2017"],
-    "noEmit": true
+    "noEmit": true,
+    "jsx": "react-jsx",
+    "jsxImportSource": "react",
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": [
@@ -25,5 +28,6 @@
     "gulpfile.js",
     "gulp-tasks",
     "dist/"
-  ]
+  ],
+  "files": ["custom.d.ts"]
 }
