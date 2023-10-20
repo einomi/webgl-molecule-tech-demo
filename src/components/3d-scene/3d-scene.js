@@ -3,7 +3,12 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
 
+import { env } from '../../js/modules/env';
+
+import BackgroundPlane from './background-plane/background-plane';
+
 const gltfLoader = new GLTFLoader();
+const CAMERA_DISTANCE = 1000;
 
 /**
  * @param {THREE.Object3D | null} object
@@ -20,6 +25,7 @@ function Mesh() {
   );
   const three = useThree();
   const light = useRef(/** @type {THREE.PointLight | null} */ (null));
+  const light2 = useRef(/** @type {THREE.PointLight | null} */ (null));
 
   React.useEffect(() => {
     gltfLoader.load('/molecule.gltf', (gltf) => {
@@ -27,24 +33,30 @@ function Mesh() {
       // set materials for children
       gltf.scene.traverse((child) => {
         if (isMeshType(child)) {
-          // @ts-ignore
           child.material = new THREE.MeshPhysicalMaterial({
-            color: 0x101010,
-            roughness: 0.6,
+            roughness: 0.5,
             metalness: 0.5,
           });
         }
       });
+
+      // change opacity
+      gltf.scene.children[0].material.opacity = 0.5;
     });
   }, []);
 
   React.useEffect(() => {
+    // near and far plane
+    three.camera.near = 0.1;
+    three.camera.far = 10000;
+    // anti aliasing
     // @ts-ignore
     three.gl.useSRGBEncoding = true;
-    three.camera.position.z = 12;
-    // change fov
-    // @ts-ignore
-    three.camera.fov = 40;
+    three.camera.position.z = CAMERA_DISTANCE;
+    three.camera.fov =
+      2 *
+      Math.atan(env.viewportResolution.value.height / 2 / CAMERA_DISTANCE) *
+      (180 / Math.PI);
     three.camera.updateProjectionMatrix();
   }, []);
 
@@ -63,31 +75,38 @@ function Mesh() {
     if (light.current) {
       const elapsedTime = _state.clock.getElapsedTime();
       // move light in circle
-      light.current.position.x = Math.sin(elapsedTime * 0.5) * 10;
-      light.current.position.y = Math.cos(elapsedTime * 0.5) * 10;
+      light.current.position.x = Math.sin(elapsedTime * 1.1) * 200;
+      light.current.position.y = Math.cos(elapsedTime * 1.1) * 200;
+    }
+
+    if (light2.current) {
+      const elapsedTime = _state.clock.getElapsedTime();
+      // move light in circle
+      light2.current.position.x = -Math.sin(elapsedTime * 1.1) * 200;
+      light2.current.position.y = -Math.cos(elapsedTime * 1.1) * 200;
     }
   });
+
+  const moleculeScale = React.useMemo(() => {
+    if (env.viewportResolution.value.width <= 768) {
+      return 0.4 * env.viewportResolution.value.width;
+    }
+    return 0.2 * env.viewportResolution.value.width;
+  }, []);
 
   return (
     model && (
       <>
         <pointLight
           ref={light}
-          position={[30, -200, -10]}
-          intensity={1000}
-          color="blue"
+          position={[30, 20, 10]}
+          intensity={5000}
+          color="#85a2ee"
         />
         <mesh ref={meshRef}>
-          <primitive object={model} scale={5} />
+          <primitive object={model} scale={moleculeScale} />
         </mesh>
-        {/*<mesh*/}
-        {/*    position={[0, 0, -10]}*/}
-        {/*>*/}
-        {/*  <planeGeometry args={[100, 100, 10]}*/}
-
-        {/*  />*/}
-        {/*  <meshStandardMaterial color="black"  />*/}
-        {/*</mesh>*/}
+        <BackgroundPlane />
       </>
     )
   );
@@ -96,7 +115,7 @@ function Mesh() {
 function Scene() {
   return (
     <Canvas>
-      <ambientLight intensity={10.5} color="blue" />
+      <ambientLight intensity={0.05} color="white" />
       <Mesh />
     </Canvas>
   );

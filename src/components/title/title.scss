@@ -1,6 +1,11 @@
 .title {
   @include font-family-serif-alt;
-  color: #838383;
-  font-size: 4.8vw;
+  color: #b79a64;
+  font-size: 13vw;
   letter-spacing: 0.02em;
+  line-height: 1.1;
+
+  @include media-md {
+    font-size: 4.8vw;
+  }
 }
