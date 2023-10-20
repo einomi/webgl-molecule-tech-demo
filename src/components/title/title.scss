@@ -1,5 +1,6 @@
 .title {
-  font-size: 92px;
-  letter-spacing: 0.02em;
+  @include font-family-serif-alt;
   color: #838383;
+  font-size: 4.8vw;
+  letter-spacing: 0.02em;
 }

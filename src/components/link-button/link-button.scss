@@ -1,0 +1,5 @@
+.link-button {
+  @include hover-default;
+  border-bottom: 1px solid rgba(#ababab, 0.2);
+  color: #ababab;
+}

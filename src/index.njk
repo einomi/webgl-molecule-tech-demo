@@ -1,17 +1,28 @@
 {% extends './_layouts/base.njk' %}
 
-{% from './components/button/button.njk' import button %}
-
 {% block title %}
   frōntensō-11ty-starter
 {% endblock %}
 
 {% block content %}
-  <div class="page-home page">
+  <div data-3d-scene></div>
+  <img class="fixed left-0 top-0 w-full h-full object-cover"
+    src="/background.jpg"
+    alt="" />
+  <div class="page-home page relative flex h-[100vh] items-center">
     <div class="container">
-      <h1 class="title">
-        WebGL 3D Molecule
-      </h1>
+      <div class="intro">
+        <h1 class="intro__title title">
+          WebGL 3D Molecule
+        </h1>
+        <div class="intro__text">
+          <p>
+            This tech demo was created by Andrew Nikonov for the Frontend
+            Developer position at Bioinformatics Institute
+          </p>
+        </div>
+        <a href="" class="intro__button link-button">Proceed to D3 charts</a>
+      </div>
     </div>
   </div>
 {% endblock %}

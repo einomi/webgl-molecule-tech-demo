@@ -8,10 +8,10 @@
 @import 'extends';
 
 /***=== COMPONENTS ===***/
-@import '../components/button/button';
 @import '../components/title/title';
 @import '../components/container/container';
-@import '../components/some-component/some-component';
+@import '../components/intro/intro';
+@import '../components/link-button/link-button';
 
 /***=== PAGES ===***/
 @import './pages/home';

@@ -6,6 +6,14 @@
   woff2 woff
 );
 
+@include font-face(
+  'Cormorant',
+  '/fonts/Cormorant-Light',
+  400,
+  null,
+  woff2 woff
+);
+
 //@include font-face(
 //  'ProximaNova',
 //  '../fonts/ProximaNova-Regular',

@@ -1,7 +1,15 @@
 @mixin font-family-sans {
-  font-family: 'Averia Serif Libre', -apple-system, BlinkMacSystemFont, Segoe UI,
-    Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-    sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+@mixin font-family-serif {
+  font-family: 'Cormorant', Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+@mixin font-family-serif-alt {
+  font-family: 'Averia Serif Libre', Georgia, Cambria, 'Times New Roman', Times,
+    serif;
 }
 
 @mixin button-reset {
