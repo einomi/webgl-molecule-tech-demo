@@ -8,20 +8,7 @@
   <div class="fixed w-full h-full left-0 top-0" data-3d-scene></div>
   <div class="page-home page relative flex h-[100vh] items-center">
     <div class="container">
-      <div class="intro">
-        <h1 class="intro__title title">
-          WebGL 3D Molecule
-        </h1>
-        <div class="intro__text">
-          <p>
-            This tech demo was created for the&nbsp;Frontend Developer position
-            at&nbsp;Bioinformatics Institute.
-          </p>
-        </div>
-        <button role="button" class="intro__button link-button">
-          Proceed to D3 charts
-        </button>
-      </div>
+      {% include './components/intro/intro.njk' %}
     </div>
   </div>
 {% endblock %}

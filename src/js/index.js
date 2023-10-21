@@ -13,6 +13,6 @@ if (sceneElement) {
 
 new (function () {
   this.modules = {
-    // add modules here
+    Intro: require('../components/intro/intro'),
   };
 })();
