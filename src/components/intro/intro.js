@@ -11,6 +11,9 @@ class Intro {
     this.container = /** @type {HTMLElement} */ (
       document.querySelector('[data-intro]')
     );
+    if (!this.container) {
+      return;
+    }
     this.runAnimation();
   }
 

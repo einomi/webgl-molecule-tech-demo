@@ -3,13 +3,11 @@ import { createRoot } from 'react-dom/client';
 
 import './modules/env';
 import Scene from '../components/3d-scene/3d-scene';
+import '../components/chart-screen/chart-screen';
 
 const sceneElement = document.querySelector('[data-3d-scene]');
 if (sceneElement) {
-  createRoot(sceneElement).render(
-    // @ts-ignore
-    <Scene />
-  );
+  createRoot(sceneElement).render(<Scene />);
 }
 
 new (function () {

@@ -92,6 +92,7 @@
     "prettier-plugin-twig-nunjucks-melody": "^0.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "recharts": "^2.9.0",
     "rimraf": "^3.0.2",
     "stylelint": "^13.11.0",
     "stylelint-config-idiomatic-order": "^8.1.0",

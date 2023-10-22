@@ -1,0 +1,21 @@
+.chart-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+
+  &__title {
+    margin-bottom: 1em;
+    font-size: 44px;
+  }
+
+  &__chart-caption {
+    margin-top: 1em;
+    color: #b9b9b9;
+    font-size: 24px;
+  }
+}

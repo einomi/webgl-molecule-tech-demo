@@ -4,14 +4,12 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { env } from '../../js/modules/env';
 
 import BackgroundPlane from './background-plane/background-plane';
-import Molecule from './molecule/molecule';
 
 const CAMERA_DISTANCE = 1000;
 
 function Scene() {
   const three = useThree();
   const light = useRef(/** @type {THREE.PointLight | null} */ (null));
-  const light2 = useRef(/** @type {THREE.PointLight | null} */ (null));
 
   React.useEffect(() => {
     const camera = /** @type {THREE.PerspectiveCamera} */ (three.camera);
@@ -34,11 +32,6 @@ function Scene() {
       light.current.position.x = x;
       light.current.position.y = y;
     }
-
-    if (light2.current) {
-      light2.current.position.x = x;
-      light2.current.position.y = y;
-    }
   });
 
   return (
@@ -51,7 +44,7 @@ function Scene() {
         color="#85a2ee"
       />
       <BackgroundPlane />
-      <Molecule />
+      {/*<Molecule />*/}
     </>
   );
 }
