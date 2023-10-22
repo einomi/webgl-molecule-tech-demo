@@ -1,21 +1,47 @@
 import React from 'react';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis } from 'recharts';
+import {
+  AreaChart,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Area,
+} from 'recharts';
 
-const data = [{ name: 'Page A', uv: 400, pv: 2400, amt: 2400 }];
+import data from '../../js/chart-data.json';
 
 function Chart() {
   return (
-    <LineChart
-      width={600}
-      height={300}
+    <AreaChart
+      width={800}
+      height={400}
       data={data}
-      margin={{ top: 5, right: 20, bottom: 5, left: 0 }}
+      margin={{ top: 5, right: 0, bottom: 5, left: 30 }}
     >
-      <Line type="monotone" dataKey="uv" stroke="#8884d8" />
-      <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-      <XAxis dataKey="name" />
-      <YAxis />
-    </LineChart>
+      <CartesianGrid stroke="#14182C" fill="#D4B66615" />
+      <XAxis
+        dataKey="name"
+        stroke="#14182C40"
+        tick={{ fill: '#ddd', strokeWidth: 0 }}
+      />
+      <YAxis
+        dataKey="cost"
+        tickFormatter={(tick) =>
+          `£${new Intl.NumberFormat('en-GB').format(Math.round(tick))}`
+        }
+        stroke="#14182C40"
+        tick={{ fill: '#ddd', strokeWidth: 0 }}
+        padding={{ bottom: 30 }}
+      />
+      <Area
+        type="monotone"
+        dataKey="cost"
+        stroke="#0085FF"
+        fill="#6493B660"
+        strokeWidth={3}
+      />
+      <Tooltip />
+    </AreaChart>
   );
 }
 

@@ -11,6 +11,12 @@
   &__title {
     margin-bottom: 1em;
     font-size: 44px;
+    text-align: center;
+  }
+
+  &__chart {
+    display: flex;
+    justify-content: center;
   }
 
   &__chart-caption {
