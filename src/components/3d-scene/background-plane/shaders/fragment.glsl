@@ -59,7 +59,7 @@ float voronoi(vec2 uv) {
 void main() {
   float c = cos(0.0);
   float s = sin(0.0);
-  vec2 center = vec2(0.5, 0.9);
+  vec2 center = vec2(0.5, 0.5);
   vec2 uv = v_uv;
 
   // image contains a 1:1 aspect ratio

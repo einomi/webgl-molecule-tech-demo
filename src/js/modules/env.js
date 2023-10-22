@@ -57,6 +57,8 @@ class Env {
         emitter.emit('env:windowResized');
       }, 100)
     );
+
+    emitter.emit('env:initialized');
   }
 
   checkModernImageFormatsSupport() {
