@@ -14,18 +14,15 @@ function Scene() {
   const light2 = useRef(/** @type {THREE.PointLight | null} */ (null));
 
   React.useEffect(() => {
-    // near and far plane
-    three.camera.near = 0.1;
-    three.camera.far = 10000;
-    // anti aliasing
-    // @ts-ignore
-    three.gl.useSRGBEncoding = true;
-    three.camera.position.z = CAMERA_DISTANCE;
-    three.camera.fov =
+    const camera = /** @type {THREE.PerspectiveCamera} */ (three.camera);
+    camera.near = 0.1;
+    camera.far = 10000;
+    camera.position.z = CAMERA_DISTANCE;
+    camera.fov =
       2 *
       Math.atan(env.viewportResolution.value.height / 2 / CAMERA_DISTANCE) *
       (180 / Math.PI);
-    three.camera.updateProjectionMatrix();
+    camera.updateProjectionMatrix();
   }, []);
 
   useFrame((state) => {
