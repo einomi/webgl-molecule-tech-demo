@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 import './modules/env';
+import '../components/welcome/welcome';
 import Scene from '../components/3d-scene/3d-scene';
 import '../components/chart-screen/chart-screen';
 

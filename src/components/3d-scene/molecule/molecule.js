@@ -1,5 +1,4 @@
-import React, { useRef } from 'react';
-import { useFrame } from '@react-three/fiber';
+import React from 'react';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import * as THREE from 'three';
 
@@ -15,8 +14,7 @@ function isMeshType(object) {
   return object?.type === 'Mesh';
 }
 
-function Molecule() {
-  const meshRef = useRef(/** @type {THREE.Mesh | null} */ (null));
+function Molecule(props, ref) {
   const [model, setModel] = React.useState(
     /** @type {THREE.Group<any> | null} */ (null)
   );
@@ -36,18 +34,6 @@ function Molecule() {
     });
   }, []);
 
-  useFrame((_state, delta) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.y += delta * 0.5;
-      meshRef.current.rotation.x += delta * 0.5;
-      meshRef.current.rotation.z = Math.sin(meshRef.current.rotation.y);
-
-      meshRef.current.position.x = Math.sin(meshRef.current.rotation.y);
-      meshRef.current.position.y = Math.sin(meshRef.current.rotation.y);
-      meshRef.current.position.z = Math.sin(meshRef.current.rotation.y);
-    }
-  });
-
   const moleculeScale = React.useMemo(() => {
     if (env.viewportResolution.value.width <= 768) {
       return 0.4 * env.viewportResolution.value.width;
@@ -57,11 +43,11 @@ function Molecule() {
 
   return (
     model && (
-      <mesh ref={meshRef}>
+      <mesh ref={ref} {...props}>
         <primitive object={model} scale={moleculeScale} />
       </mesh>
     )
   );
 }
 
-export default Molecule;
+export default React.forwardRef(Molecule);
