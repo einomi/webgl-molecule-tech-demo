@@ -6,42 +6,56 @@ import {
   YAxis,
   Tooltip,
   Area,
+  ResponsiveContainer,
 } from 'recharts';
 
 import data from '../../js/chart-data.json';
 
 function Chart() {
   return (
-    <AreaChart
-      width={800}
-      height={400}
-      data={data}
-      margin={{ top: 5, right: 0, bottom: 5, left: 30 }}
-    >
-      <CartesianGrid stroke="#14182C" fill="#D4B66615" />
-      <XAxis
-        dataKey="name"
-        stroke="#14182C40"
-        tick={{ fill: '#ddd', strokeWidth: 0 }}
-      />
-      <YAxis
-        dataKey="cost"
-        tickFormatter={(tick) =>
-          `£${new Intl.NumberFormat('en-GB').format(Math.round(tick))}`
-        }
-        stroke="#14182C40"
-        tick={{ fill: '#ddd', strokeWidth: 0 }}
-        padding={{ bottom: 30 }}
-      />
-      <Area
-        type="monotone"
-        dataKey="cost"
-        stroke="#0085FF"
-        fill="#6493B660"
-        strokeWidth={3}
-      />
-      <Tooltip />
-    </AreaChart>
+    <ResponsiveContainer aspect={5 / 3}>
+      <AreaChart data={data} margin={{ top: 5, right: 0, bottom: 0, left: 30 }}>
+        <CartesianGrid stroke="#14182C" fill="#D4B66615" />
+        <XAxis
+          dataKey="name"
+          stroke="#14182C40"
+          tick={{ fill: '#ddd', strokeWidth: 0 }}
+        />
+        <YAxis
+          id="cost"
+          dataKey="cost"
+          tickFormatter={(tick) =>
+            `£${new Intl.NumberFormat('en-GB').format(Math.round(tick))}`
+          }
+          stroke="#14182C40"
+          tick={{ fill: '#ddd', strokeWidth: 0 }}
+          scale={'log'}
+          domain={[100, 306220955]}
+        />
+        <YAxis
+          yAxisId="moore_law"
+          tick={false}
+          tickLine={false}
+          axisLine={false}
+          hide
+        />
+        <Area
+          type="monotone"
+          dataKey="cost"
+          stroke="#0085FF"
+          fill="#6493B660"
+          strokeWidth={3}
+        />
+        <Area
+          yAxisId="moore_law"
+          dataKey="moore_law"
+          stroke="#fff"
+          fill="#00000000"
+          strokeWidth={3}
+        />
+        <Tooltip />
+      </AreaChart>
+    </ResponsiveContainer>
   );
 }
 

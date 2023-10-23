@@ -6,10 +6,8 @@
 
 {% block content %}
   <div class="fixed w-full h-full left-0 top-0" data-3d-scene></div>
-  <div class="page-home page relative flex h-[100vh] items-center">
-    <div class="container">
-      {# {% include './components/intro/intro.njk' %} #}
-      {% include './components/chart-screen/chart-screen.njk' %}
-    </div>
+  <div class="page-home page relative flex flex-col h-[100vh] items-center justify-center">
+    {% include './components/intro/intro.njk' %}
+    {# {% include './components/chart-screen/chart-screen.njk' %} #}
   </div>
 {% endblock %}

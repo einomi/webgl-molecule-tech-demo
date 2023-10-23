@@ -14,9 +14,10 @@
     text-align: center;
   }
 
-  &__chart {
-    display: flex;
-    justify-content: center;
+  &__chart-container {
+    max-width: 900px;
+    margin-right: auto;
+    margin-left: auto;
   }
 
   &__chart-caption {

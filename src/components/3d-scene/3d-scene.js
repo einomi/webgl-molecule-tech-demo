@@ -4,6 +4,7 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { env } from '../../js/modules/env';
 
 import BackgroundPlane from './background-plane/background-plane';
+import Molecule from './molecule/molecule';
 
 const CAMERA_DISTANCE = 1000;
 
@@ -44,7 +45,7 @@ function Scene() {
         color="#85a2ee"
       />
       <BackgroundPlane />
-      {/*<Molecule />*/}
+      <Molecule />
     </>
   );
 }
