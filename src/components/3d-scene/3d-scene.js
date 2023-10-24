@@ -38,25 +38,11 @@ function Scene() {
         return;
       }
       gsap.to(moleculeRef.current.position, {
-        duration: 1,
+        duration: 1.75,
         x: 0,
+        ease: 'power2.out',
       });
-      gsap.to(moleculeRef.current.scale, {
-        duration: 0.8,
-        x: 1,
-        y: 1,
-        z: 1,
-      });
-      gsap.to(moleculeRef.current.rotation, {
-        duration: 1.6,
-        x: 0,
-        y: 0,
-        z: 0,
-        onComplete: () => {
-          setExperienceStarted(true);
-        },
-        ease: 'sine.out',
-      });
+      setExperienceStarted(true);
     });
   }, []);
 
@@ -70,15 +56,19 @@ function Scene() {
       light.current.position.y = y;
     }
 
-    if (moleculeRef.current && experienceStarted) {
-      moleculeRef.current.rotation.y += delta * 0.5;
-      moleculeRef.current.rotation.x += delta * 0.5;
-      moleculeRef.current.rotation.z = Math.sin(moleculeRef.current.rotation.y);
-
-      // moleculeRef.current.position.x = Math.sin(moleculeRef.current.rotation.y);
-      // moleculeRef.current.position.y = Math.sin(moleculeRef.current.rotation.y);
-      // moleculeRef.current.position.z = Math.sin(moleculeRef.current.rotation.y);
+    if (!experienceStarted || !moleculeRef.current) {
+      return;
     }
+
+    if (moleculeRef.current.scale.x > 1) {
+      moleculeRef.current.scale.x -= delta * 0.5;
+      moleculeRef.current.scale.y -= delta * 0.5;
+      moleculeRef.current.scale.z -= delta * 0.5;
+    }
+
+    moleculeRef.current.rotation.x -= delta * 0.85;
+    moleculeRef.current.rotation.y += delta * 0.85;
+    moleculeRef.current.rotation.z = Math.sin(moleculeRef.current.rotation.y);
   });
 
   return (
@@ -93,9 +83,9 @@ function Scene() {
       <BackgroundPlane />
       <Molecule
         ref={moleculeRef}
-        position={[-400, 0, 0]}
-        rotation={[0, -2 * Math.PI, Math.PI / 8]}
-        scale={1.6}
+        position={[-300, 0, 0]}
+        rotation={[Math.PI, Math.PI, 0]}
+        scale={1.4}
       />
     </>
   );

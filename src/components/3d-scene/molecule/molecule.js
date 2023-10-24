@@ -20,7 +20,7 @@ function Molecule(props, ref) {
   );
 
   React.useEffect(() => {
-    gltfLoader.load('/molecule.gltf', (gltf) => {
+    gltfLoader.load('/molecule.glb', (gltf) => {
       setModel(gltf.scene);
       // set materials for children
       gltf.scene.traverse((child) => {
