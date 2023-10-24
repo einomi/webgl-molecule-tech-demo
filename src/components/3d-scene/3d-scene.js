@@ -13,7 +13,11 @@ const CAMERA_DISTANCE = 1000;
 function Scene() {
   const three = useThree();
   const light = useRef(/** @type {THREE.PointLight | null} */ (null));
-  const moleculeRef = useRef(/** @type {Molecule | null} */ (null));
+  const moleculeRef = useRef(
+    /** @type {THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial> | null} */ (
+      null
+    )
+  );
   const [experienceStarted, setExperienceStarted] = React.useState(false);
 
   React.useEffect(() => {
@@ -30,25 +34,28 @@ function Scene() {
 
   React.useEffect(() => {
     emitter.on('experience-started', () => {
-      gsap.to(moleculeRef.current?.position, {
+      if (!moleculeRef.current) {
+        return;
+      }
+      gsap.to(moleculeRef.current.position, {
         duration: 1,
         x: 0,
       });
-      gsap.to(moleculeRef.current?.scale, {
+      gsap.to(moleculeRef.current.scale, {
         duration: 0.8,
         x: 1,
         y: 1,
         z: 1,
       });
-      gsap.to(moleculeRef.current?.rotation, {
-        duration: 0.6,
+      gsap.to(moleculeRef.current.rotation, {
+        duration: 1.6,
         x: 0,
         y: 0,
         z: 0,
         onComplete: () => {
           setExperienceStarted(true);
         },
-        ease: 'power1.out',
+        ease: 'sine.out',
       });
     });
   }, []);
@@ -87,7 +94,7 @@ function Scene() {
       <Molecule
         ref={moleculeRef}
         position={[-400, 0, 0]}
-        rotation={[0, 0, -Math.PI]}
+        rotation={[0, -2 * Math.PI, Math.PI / 8]}
         scale={1.6}
       />
     </>
