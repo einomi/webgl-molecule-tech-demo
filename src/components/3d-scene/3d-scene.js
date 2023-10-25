@@ -9,6 +9,7 @@ import BackgroundPlane from './background-plane/background-plane';
 import Molecule from './molecule/molecule';
 
 const CAMERA_DISTANCE = 1100;
+const INITIAL_X_POSITION = env.isMobile ? -200 : -300;
 
 function Scene() {
   const three = useThree();
@@ -91,7 +92,7 @@ function Scene() {
       <BackgroundPlane />
       <Molecule
         ref={moleculeRef}
-        position={[-300, 0, 0]}
+        position={[INITIAL_X_POSITION, 0, 0]}
         rotation={[Math.PI / 4, -Math.PI / 3, 0]}
         scale={1.4}
       />
