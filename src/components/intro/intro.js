@@ -41,7 +41,7 @@ class Intro {
         autoAlpha: 1,
         y: 0,
         duration: 0.65,
-        stagger: 0.15,
+        stagger: 0.05,
         delay: 0.35,
         ease: 'sine.out',
       }

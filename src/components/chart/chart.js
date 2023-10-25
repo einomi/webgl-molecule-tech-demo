@@ -53,7 +53,23 @@ function Chart() {
           fill="#00000000"
           strokeWidth={3}
         />
-        <Tooltip />
+        <Tooltip
+          contentStyle={{
+            background: '#cbcbd9',
+            border: 'none',
+            borderRadius: '2px',
+            color: '#000',
+            fontSize: '16px',
+            lineHeight: '1.2em',
+            padding: '10px',
+            textAlign: 'center',
+          }}
+          labelStyle={{ color: '#000' }}
+          itemStyle={{ color: '#000' }}
+          formatter={(value) =>
+            `£${new Intl.NumberFormat('en-GB').format(Math.round(value))}`
+          }
+        />
       </AreaChart>
     </ResponsiveContainer>
   );

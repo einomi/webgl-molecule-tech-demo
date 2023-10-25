@@ -21,7 +21,15 @@
   }
 
   &__button {
-    font-size: 32px;
+    font-size: 6.5vw;
+
+    @include media-sm {
+      font-size: 4.5vw;
+    }
+
+    @include media-lg {
+      font-size: 1.5vw;
+    }
   }
 
   [data-animation-element] {
