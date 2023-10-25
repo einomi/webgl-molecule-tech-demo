@@ -1,8 +1,11 @@
 import gsap from 'gsap';
 
+import { emitter } from '../../js/modules/event-emitter';
+
 /**
  * @typedef IntroType
  * @property {HTMLElement} container
+ * @property {NodeListOf<HTMLElement>} animationElements
  *  */
 
 /** @type {IntroType} */
@@ -14,22 +17,48 @@ class Intro {
     if (!this.container) {
       return;
     }
-    this.runAnimation();
+    this.animationElements = /** @type {NodeListOf<HTMLElement>} */ (
+      this.container.querySelectorAll('[data-animation-element]')
+    );
+    this.button = /** @type {HTMLElement} */ (
+      this.container.querySelector('[data-button]')
+    );
+    this.button.addEventListener('click', () => {
+      this.runAnimationOut();
+      emitter.emit('show-chart');
+    });
+    emitter.on('experience-started', () => {
+      this.runAnimationIn();
+    });
   }
 
-  runAnimation() {
+  runAnimationIn() {
+    gsap.set(this.container, { autoAlpha: 1 });
     gsap.fromTo(
-      this.container.children,
-      { opacity: 0, y: 10 },
+      this.animationElements,
+      { autoAlpha: 0, y: 20 },
       {
-        opacity: 1,
+        autoAlpha: 1,
         y: 0,
         duration: 0.65,
         stagger: 0.15,
-        delay: 0.1,
+        delay: 0.35,
         ease: 'sine.out',
       }
     );
+  }
+
+  runAnimationOut() {
+    gsap.to(this.animationElements, {
+      autoAlpha: 0,
+      y: -20,
+      stagger: 0.05,
+      duration: 0.65,
+      ease: 'sine.out',
+      onComplete: () => {
+        gsap.set(this.container, { autoAlpha: 0 });
+      },
+    });
   }
 }
 

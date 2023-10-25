@@ -6,7 +6,7 @@
   visibility: hidden;
 
   @include media-md {
-    font-size: 2.3vw;
+    font-size: 1.5vw;
   }
 
   &__title {
@@ -19,5 +19,11 @@
     margin-bottom: 2em;
     margin-left: auto;
     letter-spacing: 0.01em;
+  }
+
+  [data-animation-element] {
+    opacity: 0;
+    visibility: hidden;
+    will-change: transform;
   }
 }

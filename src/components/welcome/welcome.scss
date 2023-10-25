@@ -23,4 +23,8 @@
   &__button {
     font-size: 32px;
   }
+
+  [data-animation-element] {
+    will-change: transform;
+  }
 }

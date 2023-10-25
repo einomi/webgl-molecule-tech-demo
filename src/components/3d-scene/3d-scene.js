@@ -8,7 +8,7 @@ import { emitter } from '../../js/modules/event-emitter';
 import BackgroundPlane from './background-plane/background-plane';
 import Molecule from './molecule/molecule';
 
-const CAMERA_DISTANCE = 1000;
+const CAMERA_DISTANCE = 1100;
 
 function Scene() {
   const three = useThree();
@@ -38,9 +38,9 @@ function Scene() {
         return;
       }
       gsap.to(moleculeRef.current.position, {
-        duration: 1.75,
+        duration: 0.75,
         x: 0,
-        ease: 'power2.out',
+        ease: 'sine.out',
       });
       setExperienceStarted(true);
     });
@@ -48,27 +48,35 @@ function Scene() {
 
   useFrame((state, delta) => {
     const elapsedTime = state.clock.getElapsedTime();
-    const x = Math.sin(elapsedTime * 1.1) * 200;
-    const y = Math.cos(elapsedTime * 1.1) * 200;
+    const lightX = Math.sin(elapsedTime * 1.1) * 200;
+    const lightY = Math.cos(elapsedTime * 1.1) * 200;
 
     if (light.current) {
-      light.current.position.x = x;
-      light.current.position.y = y;
+      light.current.position.x = lightX;
+      light.current.position.y = lightY;
     }
 
-    if (!experienceStarted || !moleculeRef.current) {
+    if (!moleculeRef.current) {
+      return;
+    }
+
+    if (!experienceStarted) {
+      const newScale = Math.sin(elapsedTime * 0.85) * 0.05 + 1.4;
+      moleculeRef.current.scale.x = newScale;
+      moleculeRef.current.scale.y = newScale;
+      moleculeRef.current.scale.z = newScale;
       return;
     }
 
     if (moleculeRef.current.scale.x > 1) {
-      moleculeRef.current.scale.x -= delta * 0.5;
-      moleculeRef.current.scale.y -= delta * 0.5;
-      moleculeRef.current.scale.z -= delta * 0.5;
+      moleculeRef.current.scale.x -= delta * 0.7;
+      moleculeRef.current.scale.y -= delta * 0.7;
+      moleculeRef.current.scale.z -= delta * 0.7;
     }
 
-    moleculeRef.current.rotation.x -= delta * 0.85;
-    moleculeRef.current.rotation.y += delta * 0.85;
-    moleculeRef.current.rotation.z = Math.sin(moleculeRef.current.rotation.y);
+    moleculeRef.current.rotation.x -= delta * 0.5;
+    moleculeRef.current.rotation.y += delta * 0.5;
+    moleculeRef.current.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
   });
 
   return (
@@ -84,7 +92,7 @@ function Scene() {
       <Molecule
         ref={moleculeRef}
         position={[-300, 0, 0]}
-        rotation={[Math.PI, Math.PI, 0]}
+        rotation={[Math.PI / 4, -Math.PI / 3, 0]}
         scale={1.4}
       />
     </>
