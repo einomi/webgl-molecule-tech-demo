@@ -14,10 +14,21 @@ class ChartScreen {
     this.animationElements = this.container.querySelectorAll(
       '[data-animation-element]'
     );
+    this.closeButton = this.container.querySelector(
+      '[data-chart-screen-close]'
+    );
     this.initChart();
 
     emitter.on('show-chart', () => {
       this.runAnimationIn();
+    });
+
+    emitter.on('hide-chart', () => {
+      this.runAnimationOut();
+    });
+
+    this.closeButton?.addEventListener('click', () => {
+      emitter.emit('hide-chart');
     });
   }
 
@@ -36,11 +47,24 @@ class ChartScreen {
         autoAlpha: 1,
         y: 0,
         duration: 0.65,
-        stagger: 0.15,
+        stagger: 0.05,
         delay: 0.35,
         ease: 'sine.out',
       }
     );
+  }
+
+  runAnimationOut() {
+    gsap.to(this.animationElements, {
+      autoAlpha: 0,
+      y: -20,
+      duration: 0.25,
+      stagger: 0.05,
+      ease: 'sine.out',
+      onComplete: () => {
+        gsap.set(this.container, { autoAlpha: 0 });
+      },
+    });
   }
 }
 

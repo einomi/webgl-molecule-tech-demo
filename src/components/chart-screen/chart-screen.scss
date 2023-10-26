@@ -10,6 +10,47 @@
   opacity: 0;
   visibility: hidden;
 
+  &__inner {
+    position: relative;
+  }
+
+  &__close {
+    @include hover-default;
+    position: absolute;
+    right: 0;
+    top: 3vw;
+    width: 4vw;
+    height: 4vw;
+    cursor: pointer;
+    z-index: 1;
+
+    &-line {
+      display: block;
+      transform: rotate(45deg);
+      height: 1px;
+      width: 100%;
+      position: absolute;
+      background-color: #dedede;
+      left: 0;
+      top: 50%;
+      transition: transform 0.3s ease-in-out;
+
+      &:last-child {
+        transform: rotate(-45deg);
+      }
+    }
+
+    @include media-sm {
+      top: 2.2vw;
+    }
+
+    @include media-lg {
+      top: 0.7vw;
+      width: 2vw;
+      height: 2vw;
+    }
+  }
+
   &__title {
     margin-bottom: 1em;
 

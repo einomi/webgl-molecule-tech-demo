@@ -30,6 +30,10 @@ class Intro {
     emitter.on('experience-started', () => {
       this.runAnimationIn();
     });
+
+    emitter.on('hide-chart', () => {
+      this.runAnimationIn();
+    });
   }
 
   runAnimationIn() {
