@@ -17,22 +17,22 @@
   &__close {
     @include hover-default;
     position: absolute;
-    right: 0;
+    z-index: 1;
     top: 3vw;
+    right: 0;
     width: 4vw;
     height: 4vw;
     cursor: pointer;
-    z-index: 1;
 
     &-line {
-      display: block;
-      transform: rotate(45deg);
-      height: 1px;
-      width: 100%;
       position: absolute;
-      background-color: #dedede;
-      left: 0;
       top: 50%;
+      left: 0;
+      display: block;
+      width: 100%;
+      height: 1px;
+      background-color: #dedede;
+      transform: rotate(45deg);
       transition: transform 0.3s ease-in-out;
 
       &:last-child {
