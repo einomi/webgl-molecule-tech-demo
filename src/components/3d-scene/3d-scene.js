@@ -43,7 +43,7 @@ function Scene() {
         return;
       }
       gsap.to(moleculeRef.current.position, {
-        duration: 0.75,
+        duration: 0.55,
         x: 0,
         ease: 'sine.out',
       });
@@ -85,9 +85,9 @@ function Scene() {
     }
 
     if (moleculeRef.current.scale.x > 1) {
-      moleculeRef.current.scale.x -= delta * 0.7;
-      moleculeRef.current.scale.y -= delta * 0.7;
-      moleculeRef.current.scale.z -= delta * 0.7;
+      moleculeRef.current.scale.x -= delta * 0.9;
+      moleculeRef.current.scale.y -= delta * 0.9;
+      moleculeRef.current.scale.z -= delta * 0.9;
     }
 
     moleculeRef.current.rotation.x -= delta * 0.5;
