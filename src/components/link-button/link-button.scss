@@ -4,6 +4,7 @@
   border-bottom: 1px solid rgba(#ababab, 0.2);
   border-radius: 1px;
   color: #ababab;
+  user-select: none;
 
   &:focus-visible {
     border-bottom-color: transparent;
