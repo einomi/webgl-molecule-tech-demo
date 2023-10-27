@@ -8,7 +8,7 @@ import { emitter } from '../../../js/modules/event-emitter';
 import vertexShader from './shaders/vertex.glsl';
 import fragmentShader from './shaders/fragment.glsl';
 
-function BackgroundPlane() {
+function BackgroundPlane({ acceleration }) {
   const planeRef = React.useRef(null);
   const [material, setMaterial] = React.useState(
     /** @type {THREE.ShaderMaterial | null} */ (null)
@@ -33,6 +33,7 @@ function BackgroundPlane() {
           u_texture: { value: texture },
           u_texture_width: { value: 1.0 },
           u_texture_height: { value: 1.0 },
+          u_acceleration: acceleration,
         },
         vertexShader,
         fragmentShader,

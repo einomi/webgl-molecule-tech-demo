@@ -5,6 +5,7 @@ uniform vec2 u_resolution;
 uniform sampler2D u_texture;
 uniform float u_texture_width;
 uniform float u_texture_height;
+uniform float u_acceleration;
 
 varying vec2 v_uv;
 
@@ -68,13 +69,13 @@ void main() {
   uv += center;
 
   // add noise
-  float n = noise(uv * 10.0 - vec2(u_time * 0.1, -u_time * 0.3)) * 0.1;
+  float n = noise(uv * 10.0 - vec2(u_time * 0.5, -u_time * 0.3)) * 0.1;
 
-  uv.x += n * 1.2;
+  uv.x += n * 0.3;
   uv.y += n * 0.5;
 
   // add voronoi
-  float v = voronoi(uv * 10.0 + vec2(u_time * 0.6, 0.0)) * 0.1;
+  float v = voronoi(uv * 10.0 + vec2(u_time * 0.6 + u_acceleration)) * 0.04;
   uv.x += v * 1.2;
   uv.y += v * 100.5;
 

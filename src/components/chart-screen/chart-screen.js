@@ -20,15 +20,19 @@ class ChartScreen {
     this.initChart();
 
     emitter.on('show-chart', () => {
-      this.runAnimationIn();
+      this.show();
     });
 
-    emitter.on('hide-chart', () => {
-      this.runAnimationOut();
+    this.visible = false;
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        this.hide();
+      }
     });
 
     this.closeButton?.addEventListener('click', () => {
-      emitter.emit('hide-chart');
+      this.hide();
     });
   }
 
@@ -50,6 +54,7 @@ class ChartScreen {
         stagger: 0.05,
         delay: 0.35,
         ease: 'sine.out',
+        overwrite: true,
       }
     );
   }
@@ -61,10 +66,29 @@ class ChartScreen {
       duration: 0.25,
       stagger: 0.05,
       ease: 'sine.out',
+      overwrite: true,
       onComplete: () => {
         gsap.set(this.container, { autoAlpha: 0 });
       },
     });
+  }
+
+  show() {
+    if (this.visible) {
+      return;
+    }
+    this.visible = true;
+    this.runAnimationIn();
+  }
+
+  hide() {
+    if (!this.visible) {
+      return;
+    }
+    this.visible = false;
+    this.runAnimationOut();
+    emitter.emit('hide-chart');
+    emitter.emit('transition', -1);
   }
 }
 

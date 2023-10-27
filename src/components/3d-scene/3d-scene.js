@@ -11,6 +11,10 @@ import Molecule from './molecule/molecule';
 const CAMERA_DISTANCE = 1100;
 const INITIAL_X_POSITION = env.isMobile ? -200 : -300;
 
+const acceleration = {
+  value: 0.0,
+};
+
 function Scene() {
   const three = useThree();
   const light = useRef(/** @type {THREE.PointLight | null} */ (null));
@@ -44,6 +48,17 @@ function Scene() {
         ease: 'sine.out',
       });
       setExperienceStarted(true);
+    });
+  }, []);
+
+  React.useEffect(() => {
+    emitter.on('transition', (direction = 1) => {
+      const tl = gsap.timeline();
+      tl.to(acceleration, {
+        duration: 0.55,
+        value: acceleration.value + 2 * direction,
+        ease: 'sine.in',
+      });
     });
   }, []);
 
@@ -89,7 +104,7 @@ function Scene() {
         intensity={5000}
         color="#85a2ee"
       />
-      <BackgroundPlane />
+      <BackgroundPlane acceleration={acceleration} />
       <Molecule
         ref={moleculeRef}
         position={[INITIAL_X_POSITION, 0, 0]}

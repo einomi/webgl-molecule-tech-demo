@@ -28,6 +28,7 @@ class Welcome {
       },
     });
     emitter.emit('experience-started');
+    emitter.emit('transition');
   }
 }
 

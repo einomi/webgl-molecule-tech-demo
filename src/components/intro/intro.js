@@ -26,6 +26,7 @@ class Intro {
     this.button.addEventListener('click', () => {
       this.runAnimationOut();
       emitter.emit('show-chart');
+      emitter.emit('transition');
     });
     emitter.on('experience-started', () => {
       this.runAnimationIn();
@@ -48,6 +49,7 @@ class Intro {
         stagger: 0.05,
         delay: 0.35,
         ease: 'sine.out',
+        overwrite: true,
       }
     );
   }
@@ -59,6 +61,7 @@ class Intro {
       stagger: 0.05,
       duration: 0.65,
       ease: 'sine.out',
+      overwrite: true,
       onComplete: () => {
         gsap.set(this.container, { autoAlpha: 0 });
       },
