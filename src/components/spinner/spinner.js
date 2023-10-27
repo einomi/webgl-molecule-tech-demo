@@ -1,0 +1,19 @@
+import gsap from 'gsap';
+
+class Spinner {
+  constructor() {
+    this.spinnerElement = document.querySelector('[data-spinner]');
+    window.addEventListener('load', () => {
+      gsap.to(this.spinnerElement, {
+        autoAlpha: 0,
+        duration: 1,
+        ease: 'power2.inOut',
+        onComplete: () => {
+          this.spinnerElement?.remove();
+        },
+      });
+    });
+  }
+}
+
+export default new Spinner();
