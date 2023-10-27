@@ -14,13 +14,13 @@
 
 .spinner {
   position: fixed;
+  z-index: 1;
+  display: flex;
   width: 100%;
   height: 100%;
-  display: flex;
   align-items: center;
   justify-content: center;
   background-color: #000;
-  z-index: 1;
   font-size: 20px;
 
   &__inner {
