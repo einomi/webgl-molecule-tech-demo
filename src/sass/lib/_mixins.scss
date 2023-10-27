@@ -67,3 +67,15 @@
     content: '';
   }
 }
+
+@mixin ring($width: 2px, $color: transparent, $offset: 2px) {
+  box-shadow: 0 0 0 $offset rgb(15, 23, 42, 0.9),
+    0 0 0 calc($width + $offset) $color, 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+}
+
+@mixin custom-focus {
+  &:focus-visible {
+    @include ring($width: 3px, $color: #3498db, $offset: 4px);
+    outline: none;
+  }
+}

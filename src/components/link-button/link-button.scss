@@ -1,5 +1,11 @@
 .link-button {
   @include hover-default;
+  @include custom-focus;
   border-bottom: 1px solid rgba(#ababab, 0.2);
+  border-radius: 1px;
   color: #ababab;
+
+  &:focus-visible {
+    border-bottom-color: transparent;
+  }
 }
