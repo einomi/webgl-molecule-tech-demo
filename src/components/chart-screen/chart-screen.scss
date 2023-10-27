@@ -16,6 +16,7 @@
 
   &__close {
     @include hover-default;
+    @include expand-area;
     position: absolute;
     z-index: 1;
     top: 3vw;
