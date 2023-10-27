@@ -47,6 +47,13 @@ function Scene() {
         x: 0,
         ease: 'sine.out',
       });
+      gsap.to(moleculeRef.current.scale, {
+        duration: 0.55,
+        x: 1,
+        y: 1,
+        z: 1,
+        ease: 'sine.out',
+      });
       setExperienceStarted(true);
     });
   }, []);
@@ -82,12 +89,6 @@ function Scene() {
       moleculeRef.current.scale.y = newScale;
       moleculeRef.current.scale.z = newScale;
       return;
-    }
-
-    if (moleculeRef.current.scale.x > 1) {
-      moleculeRef.current.scale.x -= delta * 0.9;
-      moleculeRef.current.scale.y -= delta * 0.9;
-      moleculeRef.current.scale.z -= delta * 0.9;
     }
 
     moleculeRef.current.rotation.x -= delta * 0.5;
