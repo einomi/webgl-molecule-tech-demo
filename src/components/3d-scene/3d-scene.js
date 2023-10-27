@@ -57,7 +57,7 @@ function Scene() {
       tl.to(acceleration, {
         duration: 0.55,
         value: acceleration.value + 2 * direction,
-        ease: 'sine.in',
+        ease: 'sine.out',
       });
     });
   }, []);

@@ -76,8 +76,8 @@ void main() {
 
   // add voronoi
   float v = voronoi(uv * 10.0 + vec2(u_time * 0.6 + u_acceleration)) * 0.04;
-  uv.x += v * 1.2;
-  uv.y += v * 100.5;
+  uv.x += v * 7.0;
+  uv.y += v * 150.0;
 
   vec4 texture = texture2D(u_texture, uv);
 
