@@ -16,5 +16,10 @@
     "react/prop-types": "off",
     "react/no-unknown-property": "off"
   },
-  "plugins": ["sonarjs"]
+  "plugins": ["sonarjs"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
