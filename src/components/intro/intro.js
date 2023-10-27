@@ -1,6 +1,5 @@
-import gsap from 'gsap';
-
 import { emitter } from '../../js/modules/event-emitter';
+import { runAnimationIn, runAnimationOut } from '../../js/utils/animations';
 
 /**
  * @typedef IntroType
@@ -38,34 +37,11 @@ class Intro {
   }
 
   runAnimationIn() {
-    gsap.set(this.container, { autoAlpha: 1 });
-    gsap.fromTo(
-      this.animationElements,
-      { autoAlpha: 0, y: 20 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.65,
-        stagger: 0.05,
-        delay: 0.35,
-        ease: 'sine.out',
-        overwrite: true,
-      }
-    );
+    runAnimationIn(this.animationElements, this.container);
   }
 
   runAnimationOut() {
-    gsap.to(this.animationElements, {
-      autoAlpha: 0,
-      y: -20,
-      stagger: 0.05,
-      duration: 0.65,
-      ease: 'sine.out',
-      overwrite: true,
-      onComplete: () => {
-        gsap.set(this.container, { autoAlpha: 0 });
-      },
-    });
+    runAnimationOut(this.animationElements, this.container);
   }
 }
 

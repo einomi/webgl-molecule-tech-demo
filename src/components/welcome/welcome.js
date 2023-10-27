@@ -1,6 +1,5 @@
-import gsap from 'gsap';
-
 import { emitter } from '../../js/modules/event-emitter';
+import { runAnimationOut } from '../../js/utils/animations';
 
 class Welcome {
   constructor() {
@@ -17,16 +16,7 @@ class Welcome {
   }
 
   startExperience() {
-    gsap.to(this.animationElements, {
-      autoAlpha: 0,
-      duration: 0.5,
-      y: -20,
-      stagger: 0.05,
-      ease: 'sine.out',
-      onComplete: () => {
-        gsap.set(this.container, { autoAlpha: 0 });
-      },
-    });
+    runAnimationOut(this.animationElements, this.container);
     emitter.emit('experience-started');
     emitter.emit('transition');
   }
