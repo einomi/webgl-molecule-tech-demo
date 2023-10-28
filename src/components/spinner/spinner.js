@@ -1,5 +1,7 @@
 import gsap from 'gsap';
 
+import { emitter } from '../../js/modules/event-emitter';
+
 class Spinner {
   constructor() {
     this.spinnerElement = document.querySelector('[data-spinner]');
@@ -12,6 +14,7 @@ class Spinner {
           this.spinnerElement?.remove();
         },
       });
+      emitter.emit('show-welcome');
     });
   }
 }

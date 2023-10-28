@@ -15,3 +15,9 @@ body {
   color: #fff;
   font-weight: 300;
 }
+
+[data-animation-element] {
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform;
+}

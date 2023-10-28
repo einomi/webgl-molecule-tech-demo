@@ -1,5 +1,5 @@
 import { emitter } from '../../js/modules/event-emitter';
-import { runAnimationOut } from '../../js/utils/animations';
+import { runAnimationIn, runAnimationOut } from '../../js/utils/animations';
 
 class Welcome {
   constructor() {
@@ -13,6 +13,13 @@ class Welcome {
     this.button?.addEventListener('click', () => {
       this.startExperience();
     });
+    emitter.on('show-welcome', () => {
+      this.runAnimationIn();
+    });
+  }
+
+  runAnimationIn() {
+    runAnimationIn(this.animationElements, this.container);
   }
 
   startExperience() {
