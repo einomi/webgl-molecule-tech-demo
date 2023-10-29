@@ -14,6 +14,18 @@ function isMeshType(object) {
   return object?.type === 'Mesh';
 }
 
+/**
+ * @typedef Props
+ * @property {() => void} onModelLoaded
+ * @property {any} position
+ * @property {any} rotation
+ * @property {any} scale
+ *  */
+
+/**
+ * @param {Props} props
+ * @param {React.ForwardedRef<THREE.Mesh<THREE.BufferGeometry, THREE.MeshPhysicalMaterial>>} ref
+ */
 function Molecule(props, ref) {
   const [model, setModel] = React.useState(
     /** @type {THREE.Group<any> | null} */ (null)
@@ -25,6 +37,7 @@ function Molecule(props, ref) {
       // set materials for children
       gltf.scene.traverse((child) => {
         if (isMeshType(child)) {
+          // @ts-ignore
           child.material = new THREE.MeshPhysicalMaterial({
             roughness: 0.5,
             metalness: 0.5,
@@ -33,6 +46,13 @@ function Molecule(props, ref) {
       });
     });
   }, []);
+
+  React.useEffect(() => {
+    if (!model) {
+      return;
+    }
+    props.onModelLoaded();
+  }, [model]);
 
   const moleculeScale = React.useMemo(() => {
     if (env.viewportResolution.value.width <= 768) {

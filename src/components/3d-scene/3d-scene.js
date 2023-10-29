@@ -9,7 +9,8 @@ import BackgroundPlane from './background-plane/background-plane';
 import Molecule from './molecule/molecule';
 
 const CAMERA_DISTANCE = 1100;
-const INITIAL_X_POSITION = env.isMobile ? -200 : -300;
+const INITIAL_X_POSITION = env.isTablet ? -250 : -850;
+const INITIAL_X_TO_POSITION = env.isTablet ? -200 : -450;
 
 const acceleration = {
   value: 0.0,
@@ -19,7 +20,7 @@ function Scene() {
   const three = useThree();
   const light = useRef(/** @type {THREE.PointLight | null} */ (null));
   const moleculeRef = useRef(
-    /** @type {THREE.Mesh<THREE.BufferGeometry, THREE.MeshStandardMaterial> | null} */ (
+    /** @type {THREE.Mesh<THREE.BufferGeometry, THREE.MeshPhysicalMaterial> | null} */ (
       null
     )
   );
@@ -35,6 +36,17 @@ function Scene() {
       Math.atan(env.viewportResolution.value.height / 2 / CAMERA_DISTANCE) *
       (180 / Math.PI);
     camera.updateProjectionMatrix();
+  }, []);
+
+  React.useEffect(() => {
+    emitter.on('transition', (direction = 1) => {
+      const tl = gsap.timeline();
+      tl.to(acceleration, {
+        duration: 0.55,
+        value: acceleration.value + 2 * direction,
+        ease: 'sine.out',
+      });
+    });
   }, []);
 
   React.useEffect(() => {
@@ -55,17 +67,6 @@ function Scene() {
         ease: 'sine.out',
       });
       setExperienceStarted(true);
-    });
-  }, []);
-
-  React.useEffect(() => {
-    emitter.on('transition', (direction = 1) => {
-      const tl = gsap.timeline();
-      tl.to(acceleration, {
-        duration: 0.55,
-        value: acceleration.value + 2 * direction,
-        ease: 'sine.out',
-      });
     });
   }, []);
 
@@ -96,6 +97,26 @@ function Scene() {
     moleculeRef.current.rotation.z = Math.sin(elapsedTime * 0.5) * 0.1;
   });
 
+  function handleWindowLoad() {
+    if (!moleculeRef.current) {
+      return;
+    }
+    gsap.to(moleculeRef.current.position, {
+      duration: 0.75,
+      x: INITIAL_X_TO_POSITION,
+      delay: 0.05,
+      ease: 'power3.out',
+    });
+  }
+
+  function handleModelLoaded() {
+    if (document.readyState === 'complete') {
+      handleWindowLoad();
+    } else {
+      emitter.on('show-welcome', handleWindowLoad);
+    }
+  }
+
   return (
     <>
       <ambientLight intensity={0.05} color="white" />
@@ -111,6 +132,7 @@ function Scene() {
         position={[INITIAL_X_POSITION, 0, 0]}
         rotation={[Math.PI / 4, -Math.PI / 3, 0]}
         scale={1.4}
+        onModelLoaded={handleModelLoaded}
       />
     </>
   );

@@ -12,10 +12,10 @@ export function runAnimationIn(elements, containerElement) {
     {
       autoAlpha: 1,
       y: 0,
-      duration: 0.75,
+      duration: 0.55,
       stagger: 0.05,
-      delay: 0.3,
-      ease: 'sine.out',
+      delay: 0.2,
+      ease: 'power2.out',
       force3D: true,
       overwrite: true,
     }
@@ -29,7 +29,7 @@ export function runAnimationIn(elements, containerElement) {
 export function runAnimationOut(elements, containerElement) {
   gsap.to(elements, {
     autoAlpha: 0,
-    duration: 0.15,
+    duration: 0.125,
     y: -20,
     stagger: 0.025,
     force3D: true,

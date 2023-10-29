@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <title>
       {% block title %}
+
       {% endblock %}| Site Name
     </title>
     <meta name="viewport"
@@ -14,11 +15,16 @@
       <link rel="stylesheet" href="{{ STATIC_PATH }}/css/tailwind.css" />
       <link rel="stylesheet" href="{{ STATIC_PATH }}/css/styles.css" />
     {% endblock %}
+    <link rel="preload"
+      href="{{ STATIC_PATH }}/molecule.glb"
+      as="fetch"
+      type="application/octet-stream" />
   </head>
   <body>
     {% svg_sprite %}
 
     {% block content %}
+
     {% endblock %}
 
     {% block scripts %}

@@ -9,6 +9,8 @@ import { emitter } from './event-emitter';
  * @property {{value: THREE.Vector2}} viewportResolution
  * @property {number} viewportAspectRatio
  * @property {boolean} isPortrait
+ * @property {boolean} isMobile
+ * @property {boolean} isTablet
  * @property {boolean | undefined} browserSupportsWebp
  * @property {boolean | undefined} browserSupportsAvif
  * @property {boolean} imageFormatsSupportDetected
@@ -31,6 +33,7 @@ class Env {
     this.browserSupportsAvif = undefined;
     this.imageFormatsSupportDetected = false;
     this.isMobile = window.innerWidth < 670;
+    this.isTablet = window.innerWidth <= 1024;
 
     const updateEnvValues = () => {
       const windowWidth = window.innerWidth;
