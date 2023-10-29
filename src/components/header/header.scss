@@ -1,0 +1,50 @@
+.header {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px 22px;
+
+  @include media-lg {
+    padding: 30px 32px;
+  }
+
+  &__link {
+    @include animated;
+    @include custom-focus;
+    margin-right: 0.8em;
+    border-radius: 1px;
+    font-size: 16px;
+    opacity: 0.5;
+    user-select: none;
+
+    @include media-lg {
+      margin-right: 1em;
+      font-size: 18px;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+
+    &:focus {
+      opacity: 0.75;
+    }
+  }
+
+  &__icon-github {
+    width: 20px;
+
+    @include media-lg {
+      width: 24px;
+    }
+  }
+}
