@@ -102,19 +102,27 @@ function Scene() {
     }
 
     if (moleculeContainerRef.current) {
-      moleculeContainerRef.current.position.x = mousePositionRef.current.x * 20;
-      moleculeContainerRef.current.position.y = mousePositionRef.current.y * 20;
-      moleculeContainerRef.current.rotation.x =
-        mousePositionRef.current.y * 0.1;
-      moleculeContainerRef.current.rotation.y =
-        mousePositionRef.current.x * 0.1;
+      const lerpValue = 0.1;
+      moleculeContainerRef.current.rotation.x +=
+        (mousePositionRef.current.y * 0.1 -
+          moleculeContainerRef.current.rotation.x) *
+        lerpValue;
+      moleculeContainerRef.current.rotation.y +=
+        (mousePositionRef.current.x * 0.1 -
+          moleculeContainerRef.current.rotation.y) *
+        lerpValue;
+      moleculeContainerRef.current.position.x +=
+        (mousePositionRef.current.x * 20 -
+          moleculeContainerRef.current.position.x) *
+        lerpValue;
+      moleculeContainerRef.current.position.y +=
+        (mousePositionRef.current.y * 20 -
+          moleculeContainerRef.current.position.y) *
+        lerpValue;
     }
 
     if (!experienceStarted) {
-      const newScale =
-        Math.sin(elapsedTime * 0.85) * 0.05 +
-        1.4 +
-        mousePositionRef.current.x * mousePositionRef.current.y * 0.1;
+      const newScale = Math.sin(elapsedTime * 0.85) * 0.05 + 1.4;
       moleculeRef.current.scale.x = newScale;
       moleculeRef.current.scale.y = newScale;
       moleculeRef.current.scale.z = newScale;
