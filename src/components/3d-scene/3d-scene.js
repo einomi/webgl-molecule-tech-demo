@@ -24,7 +24,24 @@ function Scene() {
       null
     )
   );
+  const moleculeContainerRef = useRef(/** @type {THREE.Group | null} */ (null));
   const [experienceStarted, setExperienceStarted] = React.useState(false);
+  const mousePositionRef = useRef({ x: 0, y: 0 });
+
+  React.useEffect(() => {
+    const handleMouseMove = /** @param {MouseEvent} event */ (event) => {
+      mousePositionRef.current.x =
+        (event.clientX - env.viewportResolution.value.width / 2) /
+        env.viewportResolution.value.width;
+      mousePositionRef.current.y =
+        (event.clientY - env.viewportResolution.value.height / 2) /
+        env.viewportResolution.value.height;
+    };
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove);
+    };
+  }, []);
 
   React.useEffect(() => {
     const camera = /** @type {THREE.PerspectiveCamera} */ (three.camera);
@@ -84,8 +101,20 @@ function Scene() {
       return;
     }
 
+    if (moleculeContainerRef.current) {
+      moleculeContainerRef.current.position.x = mousePositionRef.current.x * 20;
+      moleculeContainerRef.current.position.y = mousePositionRef.current.y * 20;
+      moleculeContainerRef.current.rotation.x =
+        mousePositionRef.current.y * 0.1;
+      moleculeContainerRef.current.rotation.y =
+        mousePositionRef.current.x * 0.1;
+    }
+
     if (!experienceStarted) {
-      const newScale = Math.sin(elapsedTime * 0.85) * 0.05 + 1.4;
+      const newScale =
+        Math.sin(elapsedTime * 0.85) * 0.05 +
+        1.4 +
+        mousePositionRef.current.x * mousePositionRef.current.y * 0.1;
       moleculeRef.current.scale.x = newScale;
       moleculeRef.current.scale.y = newScale;
       moleculeRef.current.scale.z = newScale;
@@ -127,13 +156,15 @@ function Scene() {
         color="#85a2ee"
       />
       <BackgroundPlane acceleration={acceleration} />
-      <Molecule
-        ref={moleculeRef}
-        position={[INITIAL_X_POSITION, 0, 0]}
-        rotation={[Math.PI / 4, -Math.PI / 3, 0]}
-        scale={1.4}
-        onModelLoaded={handleModelLoaded}
-      />
+      <group ref={moleculeContainerRef}>
+        <Molecule
+          ref={moleculeRef}
+          position={[INITIAL_X_POSITION, 0, 0]}
+          rotation={[Math.PI / 4, -Math.PI / 3, 0]}
+          scale={1.4}
+          onModelLoaded={handleModelLoaded}
+        />
+      </group>
     </>
   );
 }
