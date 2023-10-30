@@ -8,7 +8,16 @@ import { emitter } from '../../../js/modules/event-emitter';
 import vertexShader from './shaders/vertex.glsl';
 import fragmentShader from './shaders/fragment.glsl';
 
-function BackgroundPlane({ acceleration }) {
+/**
+ * @typedef Props
+ * @property {{value: number}} acceleration
+ * @property {THREE.Vector2} mousePosition
+ *  */
+
+/**
+ * @param {Props} props
+ *  */
+function BackgroundPlane({ acceleration, mousePosition }) {
   const planeRef = React.useRef(null);
   const [material, setMaterial] = React.useState(
     /** @type {THREE.ShaderMaterial | null} */ (null)
@@ -34,6 +43,7 @@ function BackgroundPlane({ acceleration }) {
           u_texture_width: { value: 1.0 },
           u_texture_height: { value: 1.0 },
           u_acceleration: acceleration,
+          u_mouse_position: { value: mousePosition },
         },
         vertexShader,
         fragmentShader,

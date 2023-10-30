@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import gsap from 'gsap';
+import * as THREE from 'three';
 
 import { env } from '../../js/modules/env';
 import { emitter } from '../../js/modules/event-emitter';
@@ -26,7 +27,7 @@ function Scene() {
   );
   const moleculeContainerRef = useRef(/** @type {THREE.Group | null} */ (null));
   const [experienceStarted, setExperienceStarted] = React.useState(false);
-  const mousePositionRef = useRef({ x: 0, y: 0 });
+  const mousePositionRef = useRef(new THREE.Vector2());
 
   React.useEffect(() => {
     const handleMouseMove = /** @param {MouseEvent} event */ (event) => {
@@ -102,21 +103,21 @@ function Scene() {
     }
 
     if (moleculeContainerRef.current) {
-      const lerpValue = 0.1;
+      const lerpValue = 0.05;
       moleculeContainerRef.current.rotation.x +=
-        (mousePositionRef.current.y * 0.1 -
+        (mousePositionRef.current.y * 0.05 -
           moleculeContainerRef.current.rotation.x) *
         lerpValue;
       moleculeContainerRef.current.rotation.y +=
-        (mousePositionRef.current.x * 0.1 -
+        (mousePositionRef.current.x * 0.05 -
           moleculeContainerRef.current.rotation.y) *
         lerpValue;
       moleculeContainerRef.current.position.x +=
-        (mousePositionRef.current.x * 20 -
+        (mousePositionRef.current.x * 30 -
           moleculeContainerRef.current.position.x) *
         lerpValue;
       moleculeContainerRef.current.position.y +=
-        (mousePositionRef.current.y * 20 -
+        (mousePositionRef.current.y * 30 -
           moleculeContainerRef.current.position.y) *
         lerpValue;
     }
@@ -163,7 +164,11 @@ function Scene() {
         intensity={5000}
         color="#85a2ee"
       />
-      <BackgroundPlane acceleration={acceleration} />
+
+      <BackgroundPlane
+        acceleration={acceleration}
+        mousePosition={mousePositionRef.current}
+      />
       <group ref={moleculeContainerRef}>
         <Molecule
           ref={moleculeRef}

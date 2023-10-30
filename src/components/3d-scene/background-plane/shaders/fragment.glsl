@@ -6,6 +6,7 @@ uniform sampler2D u_texture;
 uniform float u_texture_width;
 uniform float u_texture_height;
 uniform float u_acceleration;
+uniform vec2 u_mouse_position;
 
 varying vec2 v_uv;
 
@@ -68,6 +69,17 @@ void main() {
   uv = vec2(uv.x * c - uv.y * s, uv.x * s + uv.y * c);
   uv += center;
 
+  // an effect under mouse
+  float mouse_distance = distance(
+    vec2(uv.x - 0.5, -uv.y + 0.5),
+    u_mouse_position
+  );
+  float mouse_effect = mouse_distance;
+  float mouse_distance_clamped = clamp(mouse_distance, 0.0, 1.0);
+  mouse_effect = 0.1 * pow(mouse_distance_clamped, 0.1);
+
+  uv = mix(mouse_effect * uv, uv, mouse_distance_clamped * 0.1 + 0.9);
+
   // add noise
   float n = noise(uv * 10.0 - vec2(u_time * 0.5, -u_time * 0.3)) * 0.1;
 
@@ -77,7 +89,7 @@ void main() {
   // add voronoi
   float v = voronoi(uv * 10.0 + vec2(u_time * 0.6 + u_acceleration)) * 0.04;
   uv.x += v * 7.0;
-  uv.y += v * 150.0;
+  uv.y += v * 120.0;
 
   vec4 texture = texture2D(u_texture, uv);
 
