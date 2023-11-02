@@ -5,6 +5,7 @@ import * as THREE from 'three';
 
 import { env } from '../../js/modules/env';
 import { emitter } from '../../js/modules/event-emitter';
+import { throttle } from '../../js/utils/throttle';
 
 import BackgroundPlane from './background-plane/background-plane';
 import Molecule from './molecule/molecule';
@@ -30,14 +31,27 @@ function Scene() {
   const mousePositionRef = useRef(new THREE.Vector2());
 
   React.useEffect(() => {
-    const handleMouseMove = /** @param {MouseEvent} event */ (event) => {
-      mousePositionRef.current.x =
-        (event.clientX - env.viewportResolution.value.width / 2) /
-        env.viewportResolution.value.width;
-      mousePositionRef.current.y =
-        (event.clientY - env.viewportResolution.value.height / 2) /
-        env.viewportResolution.value.height;
-    };
+    const handleMouseMove = throttle(
+      /** @param {MouseEvent} event */ (event) => {
+        const x =
+          (event.clientX - env.viewportResolution.value.width / 2) /
+          env.viewportResolution.value.width;
+        const y =
+          (event.clientY - env.viewportResolution.value.height / 2) /
+          env.viewportResolution.value.height;
+
+        // kill tween if exists
+        gsap.killTweensOf(mousePositionRef.current);
+
+        gsap.to(mousePositionRef.current, {
+          duration: 0.25,
+          x,
+          y,
+          ease: 'sine.out',
+        });
+      },
+      50
+    );
     window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
