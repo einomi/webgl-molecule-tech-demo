@@ -58,6 +58,9 @@ function Molecule(props, ref) {
     if (env.viewportResolution.value.width <= 768) {
       return 0.4 * env.viewportResolution.value.width;
     }
+    if (env.viewportResolution.value.width <= 1024) {
+      return 0.25 * env.viewportResolution.value.width;
+    }
     return 0.2 * env.viewportResolution.value.width;
   }, []);
 

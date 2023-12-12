@@ -55,13 +55,13 @@
   }
 
   &__title {
-    margin-bottom: 1em;
+    margin-bottom: 0.9em;
 
     font-size: 6.2vw;
     text-align: center;
 
     @include media-sm {
-      font-size: 5vw;
+      font-size: 3.5vw;
     }
 
     @include media-lg {
@@ -70,9 +70,16 @@
   }
 
   &__chart-container {
-    max-width: 900px;
     margin-right: auto;
     margin-left: auto;
+
+    @include media-sm {
+      max-width: 740px;
+    }
+
+    @include media-lg {
+      max-width: 900px;
+    }
   }
 
   &__chart-caption {
@@ -82,7 +89,7 @@
     text-align: center;
 
     @include media-sm {
-      font-size: 18px;
+      font-size: 20px;
     }
 
     @include media-lg {
