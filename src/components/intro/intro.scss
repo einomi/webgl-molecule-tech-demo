@@ -1,20 +1,20 @@
 .intro {
   color: #f1f1f1;
-  font-size: 4.5vw;
+  font-size: 4.1vw;
   opacity: 0;
   text-align: center;
   visibility: hidden;
 
   @include media-sm {
-    font-size: 3.5vw;
+    font-size: 3.2vw;
   }
 
   @include media-lg {
-    font-size: 1.5vw;
+    font-size: 1.4vw;
   }
 
   &__title {
-    margin-bottom: 0.85em;
+    margin-bottom: 0.6em;
   }
 
   &__text {
@@ -22,6 +22,15 @@
     margin-right: auto;
     margin-bottom: 1.7em;
     margin-left: auto;
-    letter-spacing: 0.01em;
+    font-size: 0.9em;
+    line-height: 1.5;
+
+    @include media-sm {
+      max-width: 70vw;
+    }
+
+    @include media-lg {
+      max-width: 37vw;
+    }
   }
 }

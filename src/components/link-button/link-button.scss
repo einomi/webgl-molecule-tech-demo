@@ -4,7 +4,16 @@
   border-bottom: 1px solid rgba(#ababab, 0.2);
   border-radius: 1px;
   color: #ababab;
+  font-size: 5vw;
   user-select: none;
+
+  @include media-sm {
+    font-size: 3.3vw;
+  }
+
+  @include media-lg {
+    font-size: 1.4vw;
+  }
 
   &:focus-visible {
     border-bottom-color: transparent;

@@ -1,6 +1,6 @@
 .title {
   @include font-family-serif-alt;
-  color: #969081;
+  color: $color-brand;
   font-size: 8vw;
   letter-spacing: 0.02em;
   line-height: 1.1;
@@ -10,6 +10,6 @@
   }
 
   @include media-lg {
-    font-size: 3vw;
+    font-size: 3.1vw;
   }
 }

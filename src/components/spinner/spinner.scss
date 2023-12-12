@@ -21,7 +21,8 @@
   align-items: center;
   justify-content: center;
   background-color: #000;
-  font-size: 20px;
+  color: $color-brand;
+  font-size: 16px;
 
   &__inner {
     animation: spinner 1.5s infinite;
@@ -30,10 +31,10 @@
   }
 
   @include media-sm {
-    font-size: 24px;
+    font-size: 20px;
   }
 
   @include media-lg {
-    font-size: 32px;
+    font-size: 24px;
   }
 }

@@ -57,15 +57,15 @@
   &__title {
     margin-bottom: 1em;
 
-    font-size: 7vw;
+    font-size: 6.2vw;
     text-align: center;
 
     @include media-sm {
-      font-size: 5.5vw;
+      font-size: 5vw;
     }
 
     @include media-lg {
-      font-size: 2.5vw;
+      font-size: 2.3vw;
     }
   }
 
@@ -76,17 +76,23 @@
   }
 
   &__chart-caption {
-    margin-top: 1em;
+    margin-top: 1.45em;
     color: #b9b9b9;
-    font-size: 16px;
+    font-size: 14px;
     text-align: center;
 
     @include media-sm {
-      font-size: 20px;
+      font-size: 18px;
     }
 
     @include media-lg {
-      font-size: 24px;
+      font-size: 20px;
+    }
+  }
+
+  &__chart {
+    tspan {
+      font-size: 14px;
     }
   }
 }

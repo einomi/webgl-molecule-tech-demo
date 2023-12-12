@@ -21,18 +21,6 @@
   }
 
   &__title {
-    margin-bottom: 0.3em;
-  }
-
-  &__button {
-    font-size: 6.5vw;
-
-    @include media-sm {
-      font-size: 4.5vw;
-    }
-
-    @include media-lg {
-      font-size: 1.5vw;
-    }
+    margin-bottom: 0.5em;
   }
 }

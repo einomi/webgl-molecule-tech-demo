@@ -59,8 +59,8 @@ function Chart() {
             border: 'none',
             borderRadius: '2px',
             color: '#000',
-            fontSize: '16px',
-            lineHeight: '1.2em',
+            fontSize: '14px',
+            lineHeight: '1em',
             padding: '10px',
             textAlign: 'center',
           }}
