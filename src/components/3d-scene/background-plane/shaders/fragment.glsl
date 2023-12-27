@@ -93,5 +93,8 @@ void main() {
 
   vec4 texture = texture2D(u_texture, uv);
 
+  // increase brightness
+  texture.rgb += vec3(0.03);
+
   gl_FragColor = vec4(texture.rgb, 1.0);
 }
